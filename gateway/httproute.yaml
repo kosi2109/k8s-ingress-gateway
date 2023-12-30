@@ -1,0 +1,17 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: example-httproute
+spec:
+  parentRefs:
+  - name: example-gateway
+  hostnames:
+  - "hello-world.info"
+  rules:
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /service1
+    backendRefs:
+    - name: service-1-svc
+      port: 8080
